@@ -27,8 +27,9 @@ import { CacheModule } from './cache/cache.module';
     StateModule,
     CityModule,
     AddressModule,
-    CacheModule],
+    CacheModule,
+  ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

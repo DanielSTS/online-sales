@@ -5,13 +5,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class StateService {
-    constructor(
-        @InjectRepository(StateEntity)
-        private readonly stateRepository: Repository<StateEntity>
-    ) { }
+  constructor(
+    @InjectRepository(StateEntity)
+    private readonly stateRepository: Repository<StateEntity>,
+  ) {}
 
-
-    getAllState(): Promise<StateEntity[]> {
-        return this.stateRepository.find();
-    }
+  getAllState(): Promise<StateEntity[]> {
+    return this.stateRepository.find();
+  }
 }

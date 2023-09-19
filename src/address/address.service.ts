@@ -6,16 +6,18 @@ import { CreateAddressDto } from './dtos/createAddress.dto';
 
 @Injectable()
 export class AddressService {
-    constructor(
+  constructor(
+    @InjectRepository(AddressEntity)
+    private readonly addressRepository: Repository<AddressEntity>,
+  ) {}
 
-        @InjectRepository(AddressEntity)
-        private readonly addressRepository: Repository<AddressEntity>
-    ) { };
-
-    async createAddress(createAddress: CreateAddressDto, userId: number): Promise<AddressEntity> {
-        return this.addressRepository.save({
-            ...createAddress,
-            userId,
-        })
-    }
+  async createAddress(
+    createAddress: CreateAddressDto,
+    userId: number,
+  ): Promise<AddressEntity> {
+    return this.addressRepository.save({
+      ...createAddress,
+      userId,
+    });
+  }
 }

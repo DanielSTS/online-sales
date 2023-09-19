@@ -7,6 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([AddressEntity])],
   controllers: [AddressController],
-  providers: [AddressService]
+  providers: [AddressService],
 })
-export class AddressModule { }
+export class AddressModule {}
