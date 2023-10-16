@@ -17,7 +17,7 @@ describe('CityService', () => {
         {
           provide: CacheService,
           useValue: {
-            getCache: jest.fn().mockResolvedValue(cityEntityMock),
+            getCache: jest.fn().mockResolvedValue([cityEntityMock]),
           },
         },
         {
