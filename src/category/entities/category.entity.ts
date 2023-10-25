@@ -1,4 +1,4 @@
-import { ProductEntity } from 'src/product/entities/product.entity';
+import { ProductEntity } from '../../product/entities/product.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -23,5 +23,5 @@ export class CategoryEntity {
   updatedAt: Date;
 
   @OneToMany(() => ProductEntity, (product) => product.category)
-  products: ProductEntity[];
+  products?: ProductEntity[];
 }
