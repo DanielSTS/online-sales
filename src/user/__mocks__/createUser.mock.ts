@@ -5,5 +5,5 @@ export const createUserMock: CreateUserDto = {
   email: 'emailmock@email.com',
   phone: '88882222',
   cpf: '11111111',
-  password: 'largepassword',
+  password: 'abc',
 };
