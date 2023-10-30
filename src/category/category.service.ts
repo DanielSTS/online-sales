@@ -16,17 +16,17 @@ export class CategoryService {
   ) {}
 
   async createCategory(
-    categoryDtoMock: CreateCategoryDto,
+    createCategoryDto: CreateCategoryDto,
   ): Promise<CategoryEntity> {
-    const category = await this.findCategoryByName(categoryDtoMock.name).catch(
-      () => undefined,
-    );
+    const category = await this.findCategoryByName(
+      createCategoryDto.name,
+    ).catch(() => undefined);
     if (category) {
       throw new BadRequestException(
-        `Category name ${categoryDtoMock.name} already exists`,
+        `Category name ${createCategoryDto.name} already exists`,
       );
     }
-    return this.categoryRepository.save(categoryDtoMock);
+    return this.categoryRepository.save(createCategoryDto);
   }
 
   async findAllCategories(): Promise<CategoryEntity[]> {
@@ -44,7 +44,19 @@ export class CategoryService {
       },
     });
     if (!category) {
-      throw new NotFoundException(`Category  name ${name} not found`);
+      throw new NotFoundException(`Category name ${name} not found`);
+    }
+    return category;
+  }
+
+  async findCategoryById(id: number) {
+    const category = await this.categoryRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!category) {
+      throw new NotFoundException(`Category Id ${id} not found`);
     }
     return category;
   }
