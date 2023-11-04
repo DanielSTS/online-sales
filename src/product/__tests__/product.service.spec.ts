@@ -95,4 +95,19 @@ describe('ProductService', () => {
     jest.spyOn(productRepository, 'findOne').mockResolvedValueOnce(undefined);
     expect(service.deleteProduct(999)).rejects.toThrowError();
   });
+
+  it('should return a product after update', async () => {
+    const result = await service.updateProduct(
+      productEntityMock.id,
+      createProductDtoMock,
+    );
+    expect(result).toEqual(productEntityMock);
+  });
+
+  it('should return error if product not found in update', async () => {
+    jest.spyOn(productRepository, 'findOne').mockResolvedValueOnce(undefined);
+    expect(
+      service.updateProduct(productEntityMock.id, createProductDtoMock),
+    ).rejects.toThrowError();
+  });
 });
