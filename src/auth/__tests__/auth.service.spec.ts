@@ -5,7 +5,7 @@ import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { JwtService } from '@nestjs/jwt';
 import { jwtMock } from '../__mocks__/jwt.mock';
 import { loginDto } from '../__mocks__/login-user.mock';
-import { ReturnUserDto } from '../../user/dtos/returnUser.dto';
+import { ReturnUserDto } from '../../user/dtos/return-user.dto';
 
 describe('AuthService', () => {
   let service: AuthService;

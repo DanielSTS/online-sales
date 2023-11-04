@@ -6,13 +6,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateAddressDto } from './dtos/createAddress.dto';
+import { CreateAddressDto } from './dtos/create-address.dto';
 import { AddressService } from './address.service';
 import { AddressEntity } from './entities/address.entity';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { UserId } from '../decorators/user-id.decorator';
-import { ReturnAddressDto } from './dtos/returnAddress.dto';
+import { ReturnAddressDto } from './dtos/return-address.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('address')

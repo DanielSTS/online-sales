@@ -1,5 +1,5 @@
 import { cityEntityMock } from '../../city/__mocks__/city.mock';
-import { CreateAddressDto } from '../dtos/createAddress.dto';
+import { CreateAddressDto } from '../dtos/create-address.dto';
 
 export const createAddressMock: CreateAddressDto = {
   cep: '58410452',

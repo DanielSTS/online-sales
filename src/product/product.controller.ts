@@ -12,11 +12,11 @@ import {
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { ProductService } from './product.service';
-import { ReturnProductDto } from './dtos/returnProduct.dto';
+import { ReturnProductDto } from './dtos/return-product.dto';
 import { ProductEntity } from './entities/product.entity';
-import { CreateProductDto } from './dtos/createProduct.dto';
+import { CreateProductDto } from './dtos/create-product.dto';
 import { DeleteResult } from 'typeorm';
-import { UpdateProductDto } from './dtos/updateProduct.dto';
+import { UpdateProductDto } from './dtos/update-product.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('product')
