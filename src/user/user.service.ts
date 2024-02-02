@@ -8,7 +8,7 @@ import { UserEntity } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserType } from './enum/user-type.enum';
-import { UpdatePasswordDto } from './dtos/update-user.dto';
+import { UpdatePasswordDto } from './dtos/update-password.dto';
 import { createHashedPassword, validatePassword } from '../utils/password';
 
 @Injectable()
