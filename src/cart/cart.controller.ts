@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Delete,
+  Get,
   Post,
   UsePipes,
   ValidationPipe,
@@ -9,9 +11,9 @@ import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { CartService } from './cart.service';
 import { UserId } from '../decorators/user-id.decorator';
-import { ReturnCartProductDTO } from '../cart-product/dtos/return-cart-product.dto';
 import { InsertCartDTO } from './dtos/insert-cart.dto';
 import { ReturnCartDTO } from './dtos/return-cart.dto';
+import { DeleteResult } from 'typeorm';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('cart')
@@ -24,8 +26,20 @@ export class CartController {
     @Body() insertCartDTO: InsertCartDTO,
     @UserId() userId: number,
   ): Promise<ReturnCartDTO> {
-    return new ReturnCartProductDTO(
+    return new ReturnCartDTO(
       await this.cartService.insertProductInCart(insertCartDTO, userId),
     );
+  }
+
+  @Get()
+  async findCartByUserId(@UserId() userId: number): Promise<ReturnCartDTO> {
+    return new ReturnCartDTO(
+      await this.cartService.findCartByUserId(userId, true),
+    );
+  }
+
+  @Delete()
+  async clearCart(@UserId() userId: number): Promise<DeleteResult> {
+    return this.cartService.clearCart(userId);
   }
 }
