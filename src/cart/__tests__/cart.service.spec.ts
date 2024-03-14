@@ -6,11 +6,11 @@ import { CartEntity } from '../entities/cart.entity';
 import { cartEntityMock } from '../__mocks__/cart.mock';
 import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { CartProductService } from '../../cart-product/cart-product.service';
-import { returnDeleteMock } from '../../product/__mocks__/delete-product.mock';
 import { NotFoundException } from '@nestjs/common';
 import { insertCartMock } from '../__mocks__/insert-cart.mock';
 import { productEntityMock } from '../../product/__mocks__/product.mock';
 import { updateCartMock } from '../__mocks__/update-cart.mock';
+import { returnDeleteMock } from '../../__mocks__/return-delete.mock';
 
 describe('CartService', () => {
   let service: CartService;

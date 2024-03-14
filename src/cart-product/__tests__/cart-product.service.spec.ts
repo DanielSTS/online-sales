@@ -5,12 +5,12 @@ import { Repository } from 'typeorm';
 import { CartProductService } from '../cart-product.service';
 import { CartProductEntity } from '../entities/cart-product.entity';
 import { cartEntityMock } from '../../cart/__mocks__/cart.mock';
-import { returnDeleteMock } from '../../product/__mocks__/delete-product.mock';
 import { productEntityMock } from '../../product/__mocks__/product.mock';
 import { insertCartMock } from '../../cart/__mocks__/insert-cart.mock';
 import { cartProductEntityMock } from '../__mock__/cart-product.mock';
 import { NotFoundException } from '@nestjs/common';
 import { updateCartMock } from '../../cart/__mocks__/update-cart.mock';
+import { returnDeleteMock } from '../../__mocks__/return-delete.mock';
 
 describe('CartProductService', () => {
   let service: CartProductService;
