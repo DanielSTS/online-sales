@@ -1,6 +1,6 @@
 import { CategoryEntity } from '../entities/category.entity';
 
-export class ReturnCategoryDto {
+export class ReturnCategoryDTO {
   id: number;
   name: string;
   constructor(categoryEntity: CategoryEntity) {

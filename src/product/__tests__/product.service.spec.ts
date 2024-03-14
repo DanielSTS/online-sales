@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { productEntityMock } from '../__mocks__/product.mock';
-import { createProductDtoMock } from '../__mocks__/create-product.mock';
+import { createProductDTOMock } from '../__mocks__/create-product.mock';
 import { CategoryService } from '../../category/category.service';
 import { categoryEntityMock } from '../../category/__mocks__/category.mock';
 import { returnDeleteMock } from '../__mocks__/delete-product.mock';
@@ -65,7 +65,7 @@ describe('ProductService', () => {
   });
 
   it('should return a product after save', async () => {
-    const product = await service.createProduct(createProductDtoMock);
+    const product = await service.createProduct(createProductDTOMock);
     expect(product).toEqual(productEntityMock);
   });
 
@@ -73,7 +73,7 @@ describe('ProductService', () => {
     jest
       .spyOn(categoryService, 'findCategoryById')
       .mockRejectedValueOnce(new Error());
-    expect(service.createProduct(createProductDtoMock)).rejects.toThrowError();
+    expect(service.createProduct(createProductDTOMock)).rejects.toThrowError();
   });
 
   it('should return a product in findById', async () => {
@@ -99,7 +99,7 @@ describe('ProductService', () => {
   it('should return a product after update', async () => {
     const result = await service.updateProduct(
       productEntityMock.id,
-      createProductDtoMock,
+      createProductDTOMock,
     );
     expect(result).toEqual(productEntityMock);
   });
@@ -107,7 +107,7 @@ describe('ProductService', () => {
   it('should return error if product not found in update', async () => {
     jest.spyOn(productRepository, 'findOne').mockResolvedValueOnce(undefined);
     expect(
-      service.updateProduct(productEntityMock.id, createProductDtoMock),
+      service.updateProduct(productEntityMock.id, createProductDTOMock),
     ).rejects.toThrowError();
   });
 });

@@ -5,12 +5,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Roles } from 'src/decorators/roles.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
-import { InsertCartDto } from './dtos/insert-cart.dto';
-import { CartEntity } from './entities/cart.entity';
+import { Roles } from '../decorators/roles.decorator';
+import { UserType } from '../user/enum/user-type.enum';
 import { CartService } from './cart.service';
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../decorators/user-id.decorator';
+import { ReturnCartProductDTO } from '../cart-product/dtos/return-cart-product.dto';
+import { InsertCartDTO } from './dtos/insert-cart.dto';
+import { ReturnCartDTO } from './dtos/return-cart.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('cart')
@@ -20,9 +21,11 @@ export class CartController {
   @UsePipes(ValidationPipe)
   @Post()
   async createCart(
-    @Body() insertCartDto: InsertCartDto,
+    @Body() insertCartDTO: InsertCartDTO,
     @UserId() userId: number,
-  ): Promise<CartEntity> {
-    return this.cartService.insertProductInCart(insertCartDto, userId);
+  ): Promise<ReturnCartDTO> {
+    return new ReturnCartProductDTO(
+      await this.cartService.insertProductInCart(insertCartDTO, userId),
+    );
   }
 }

@@ -1,7 +1,7 @@
 import { categoryEntityMock } from '../../category/__mocks__/category.mock';
-import { CreateProductDto } from '../dtos/create-product.dto';
+import { CreateProductDTO } from '../dtos/create-product.dto';
 
-export const createProductDtoMock: CreateProductDto = {
+export const createProductDTOMock: CreateProductDTO = {
   name: 'namemock',
   categoryId: categoryEntityMock.id,
   price: 34.3,

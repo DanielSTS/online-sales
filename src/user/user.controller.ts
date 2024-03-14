@@ -8,11 +8,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { CreateUserDTO } from './dtos/create-user.dto';
 import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
-import { ReturnUserDto } from './dtos/return-user.dto';
-import { UpdatePasswordDto } from './dtos/update-password.dto';
+import { ReturnUserDTO } from './dtos/return-user.dto';
+import { UpdatePasswordDTO } from './dtos/update-password.dto';
 import { UserId } from '../decorators/user-id.decorator';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from './enum/user-type.enum';
@@ -23,22 +23,22 @@ export class UserController {
 
   @UsePipes(ValidationPipe)
   @Post()
-  async createUser(@Body() createUser: CreateUserDto): Promise<UserEntity> {
+  async createUser(@Body() createUser: CreateUserDTO): Promise<UserEntity> {
     return this.userService.createUser(createUser);
   }
 
   @Roles(UserType.Admin)
   @Get()
-  async getAllUser(): Promise<ReturnUserDto[]> {
+  async getAllUser(): Promise<ReturnUserDTO[]> {
     return (await this.userService.getAllUser()).map(
-      (userEntity) => new ReturnUserDto(userEntity),
+      (userEntity) => new ReturnUserDTO(userEntity),
     );
   }
 
   @Roles(UserType.Admin)
   @Get('/:userId')
-  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDto> {
-    return new ReturnUserDto(
+  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDTO> {
+    return new ReturnUserDTO(
       await this.userService.getUserByIdUsingRelations(userId),
     );
   }
@@ -48,10 +48,10 @@ export class UserController {
   @UsePipes(ValidationPipe)
   async updatePasswordUser(
     @UserId('userId') userId: number,
-    @Body() updatePasswordDto: UpdatePasswordDto,
-  ): Promise<ReturnUserDto> {
-    return new ReturnUserDto(
-      await this.userService.updatePasswordUser(updatePasswordDto, userId),
+    @Body() updatePasswordDTO: UpdatePasswordDTO,
+  ): Promise<ReturnUserDTO> {
+    return new ReturnUserDTO(
+      await this.userService.updatePasswordUser(updatePasswordDTO, userId),
     );
   }
 }

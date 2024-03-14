@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { UserType } from '../user/enum/user-type.enum';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { JwtService } from '@nestjs/jwt';
-import { LoginPayloadDto } from '../auth/dtos/login-payload.dto';
+import { LoginPayloadDTO } from '../auth/dtos/login-payload.dto';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -23,7 +23,7 @@ export class RolesGuard implements CanActivate {
 
     const { authorization } = context.switchToHttp().getRequest().headers;
 
-    const loginPayload: LoginPayloadDto | undefined = await this.jwtService
+    const loginPayload: LoginPayloadDTO | undefined = await this.jwtService
       .verifyAsync(authorization, {
         secret: process.env.JWT_SECRET,
       })

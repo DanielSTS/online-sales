@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CategoryEntity } from '../entities/category.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { categoryEntityMock } from '../__mocks__/category.mock';
-import { createCategoryDtoMock } from '../__mocks__/create-category.mock';
+import { createCategoryDTOMock } from '../__mocks__/create-category.mock';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -53,26 +53,26 @@ describe('CategoryService', () => {
 
   it('should return a category after save', async () => {
     jest.spyOn(categoryRepository, 'findOne').mockResolvedValueOnce(undefined);
-    const category = await service.createCategory(createCategoryDtoMock);
+    const category = await service.createCategory(createCategoryDTOMock);
     expect(category).toEqual(categoryEntityMock);
   });
 
   it('should return error if exist category name in create', async () => {
     expect(
-      service.createCategory(createCategoryDtoMock),
+      service.createCategory(createCategoryDTOMock),
     ).rejects.toThrowError();
   });
 
   it('should return error in create category exception', async () => {
     jest.spyOn(categoryRepository, 'save').mockRejectedValueOnce(new Error());
     expect(
-      service.createCategory(createCategoryDtoMock),
+      service.createCategory(createCategoryDTOMock),
     ).rejects.toThrowError();
   });
 
   it('should return a category in find by name', async () => {
     const category = await service.findCategoryByName(
-      createCategoryDtoMock.name,
+      createCategoryDTOMock.name,
     );
     expect(category).toEqual(categoryEntityMock);
   });
@@ -80,7 +80,7 @@ describe('CategoryService', () => {
   it('should return error in category find by name empty', async () => {
     jest.spyOn(categoryRepository, 'findOne').mockResolvedValueOnce(undefined);
     expect(
-      service.findCategoryByName(createCategoryDtoMock.name),
+      service.findCategoryByName(createCategoryDTOMock.name),
     ).rejects.toThrowError();
   });
 

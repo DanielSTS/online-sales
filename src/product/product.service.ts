@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { CategoryService } from '../category/category.service';
-import { CreateProductDto } from './dtos/create-product.dto';
-import { UpdateProductDto } from './dtos/update-product.dto';
+import { CreateProductDTO } from './dtos/create-product.dto';
+import { UpdateProductDTO } from './dtos/update-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -15,10 +15,10 @@ export class ProductService {
   ) {}
 
   async createProduct(
-    createProductDto: CreateProductDto,
+    createProductDTO: CreateProductDTO,
   ): Promise<ProductEntity> {
-    await this.categoryService.findCategoryById(createProductDto.categoryId);
-    return this.productRepository.save({ ...createProductDto });
+    await this.categoryService.findCategoryById(createProductDTO.categoryId);
+    return this.productRepository.save({ ...createProductDTO });
   }
 
   async findAllProducts() {
@@ -48,9 +48,9 @@ export class ProductService {
 
   async updateProduct(
     productId: number,
-    updateProductDto: UpdateProductDto,
+    updateProductDTO: UpdateProductDTO,
   ): Promise<ProductEntity> {
     const product = await this.findProductById(productId);
-    return this.productRepository.save({ ...product, ...updateProductDto });
+    return this.productRepository.save({ ...product, ...updateProductDTO });
   }
 }

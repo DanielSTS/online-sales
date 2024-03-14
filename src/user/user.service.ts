@@ -3,12 +3,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { CreateUserDTO } from './dtos/create-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserType } from './enum/user-type.enum';
-import { UpdatePasswordDto } from './dtos/update-password.dto';
+import { UpdatePasswordDTO } from './dtos/update-password.dto';
 import { createHashedPassword, validatePassword } from '../utils/password';
 
 @Injectable()
@@ -18,16 +18,16 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const user = await this.findUserByEmail(createUserDto.email).catch(
+  async createUser(createUserDTO: CreateUserDTO): Promise<UserEntity> {
+    const user = await this.findUserByEmail(createUserDTO.email).catch(
       () => undefined,
     );
     if (user) {
       throw new BadRequestException('email registered in system');
     }
-    const passwordHashed = await createHashedPassword(createUserDto.password);
+    const passwordHashed = await createHashedPassword(createUserDTO.password);
     return this.userRepository.save({
-      ...createUserDto,
+      ...createUserDTO,
       typeUser: UserType.User,
       password: passwordHashed,
     });
@@ -81,15 +81,15 @@ export class UserService {
   }
 
   async updatePasswordUser(
-    updatePasswordDto: UpdatePasswordDto,
+    updatePasswordDTO: UpdatePasswordDTO,
     userId: number,
   ): Promise<UserEntity> {
     const user = await this.findUserById(userId);
     const passwordHashed = await createHashedPassword(
-      updatePasswordDto.newPassword,
+      updatePasswordDTO.newPassword,
     );
     const isMatch = await validatePassword(
-      updatePasswordDto.lastPassword,
+      updatePasswordDTO.lastPassword,
       user.password,
     );
     if (!isMatch) {

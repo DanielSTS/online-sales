@@ -6,13 +6,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateAddressDto } from './dtos/create-address.dto';
+import { CreateAddressDTO } from './dtos/create-address.dto';
 import { AddressService } from './address.service';
 import { AddressEntity } from './entities/address.entity';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { UserId } from '../decorators/user-id.decorator';
-import { ReturnAddressDto } from './dtos/return-address.dto';
+import { ReturnAddressDTO } from './dtos/return-address.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('address')
@@ -22,7 +22,7 @@ export class AddressController {
   @Post()
   @UsePipes(ValidationPipe)
   async createAddress(
-    @Body() createAddress: CreateAddressDto,
+    @Body() createAddress: CreateAddressDTO,
     @UserId() userId: number,
   ): Promise<AddressEntity> {
     return this.addressService.createAddress(createAddress, userId);
@@ -32,9 +32,9 @@ export class AddressController {
   @UsePipes(ValidationPipe)
   async findAddressByUserId(
     @UserId() userId: number,
-  ): Promise<ReturnAddressDto[]> {
+  ): Promise<ReturnAddressDTO[]> {
     return (await this.addressService.findAddressByUserId(userId)).map(
-      (address) => new ReturnAddressDto(address),
+      (address) => new ReturnAddressDTO(address),
     );
   }
 }

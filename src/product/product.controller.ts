@@ -12,11 +12,11 @@ import {
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { ProductService } from './product.service';
-import { ReturnProductDto } from './dtos/return-product.dto';
+import { ReturnProductDTO } from './dtos/return-product.dto';
 import { ProductEntity } from './entities/product.entity';
-import { CreateProductDto } from './dtos/create-product.dto';
+import { CreateProductDTO } from './dtos/create-product.dto';
 import { DeleteResult } from 'typeorm';
-import { UpdateProductDto } from './dtos/update-product.dto';
+import { UpdateProductDTO } from './dtos/update-product.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('product')
@@ -24,9 +24,9 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  async findAllCategories(): Promise<ReturnProductDto[]> {
+  async findAllCategories(): Promise<ReturnProductDTO[]> {
     return (await this.productService.findAllProducts()).map(
-      (category) => new ReturnProductDto(category),
+      (category) => new ReturnProductDTO(category),
     );
   }
 
@@ -34,7 +34,7 @@ export class ProductController {
   @Post()
   @UsePipes(ValidationPipe)
   async createProduct(
-    @Body() createProduct: CreateProductDto,
+    @Body() createProduct: CreateProductDTO,
   ): Promise<ProductEntity> {
     return this.productService.createProduct(createProduct);
   }
@@ -44,7 +44,7 @@ export class ProductController {
   @UsePipes(ValidationPipe)
   async updateProduct(
     @Param('productId') productId: number,
-    @Body() updateProduct: UpdateProductDto,
+    @Body() updateProduct: UpdateProductDTO,
   ): Promise<ProductEntity> {
     return this.productService.updateProduct(productId, updateProduct);
   }

@@ -1,6 +1,6 @@
-import { ReturnUserDto } from '../../user/dtos/return-user.dto';
+import { ReturnUserDTO } from '../../user/dtos/return-user.dto';
 
-export interface ReturnLoginDto {
-  user: ReturnUserDto;
+export interface ReturnLoginDTO {
+  user: ReturnUserDTO;
   accessToken: string;
 }
