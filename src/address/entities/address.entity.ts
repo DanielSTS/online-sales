@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { CityEntity } from '../../city/entities/city.entity';
-import { OrderEntity } from 'src/order/entities/order.entity';
+import { OrderEntity } from '../../order/entities/order.entity';
 
 @Entity({ name: 'address' })
 export class AddressEntity {
