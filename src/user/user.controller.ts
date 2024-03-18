@@ -49,9 +49,7 @@ export class UserController {
   async updatePasswordUser(
     @UserId('userId') userId: number,
     @Body() updatePasswordDTO: UpdatePasswordDTO,
-  ): Promise<ReturnUserDTO> {
-    return new ReturnUserDTO(
-      await this.userService.updatePasswordUser(updatePasswordDTO, userId),
-    );
+  ): Promise<UserEntity> {
+    return this.userService.updatePasswordUser(updatePasswordDTO, userId);
   }
 }
