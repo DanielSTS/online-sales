@@ -6,9 +6,9 @@ import { Repository } from 'typeorm';
 import { PaymentCreditCardEntity } from './entities/payment-credit-card.entity';
 import { PaymentPixEntity } from './entities/payment-pix.entity';
 import { PaymentEntity } from './entities/payment.entity';
-import { CartProductEntity } from 'src/cart-product/entities/cart-product.entity';
-import { CartEntity } from 'src/cart/entities/cart.entity';
-import { ProductEntity } from 'src/product/entities/product.entity';
+import { CartProductEntity } from '../cart-product/entities/cart-product.entity';
+import { CartEntity } from '../cart/entities/cart.entity';
+import { ProductEntity } from '../product/entities/product.entity';
 
 @Injectable()
 export class PaymentService {
