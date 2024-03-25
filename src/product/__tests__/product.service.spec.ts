@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductService } from '../product.service';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { productEntityMock } from '../__mocks__/product.mock';
@@ -50,18 +50,45 @@ describe('ProductService', () => {
   });
 
   it('should return list of products', async () => {
-    const categories = await service.findAllProducts();
+    const categories = await service.findAll();
     expect(categories).toEqual([productEntityMock]);
+  });
+
+  it('should return relations in find all products', async () => {
+    const spy = jest.spyOn(productRepository, 'find');
+    const products = await service.findAll([], true);
+
+    expect(products).toEqual([productEntityMock]);
+    expect(spy.mock.calls[0][0]).toEqual({
+      relations: {
+        category: true,
+      },
+    });
+  });
+
+  it('should return relatiosn and array in find all products', async () => {
+    const spy = jest.spyOn(productRepository, 'find');
+    const products = await service.findAll([1], true);
+
+    expect(products).toEqual([productEntityMock]);
+    expect(spy.mock.calls[0][0]).toEqual({
+      where: {
+        id: In([1]),
+      },
+      relations: {
+        category: true,
+      },
+    });
   });
 
   it('should return error in list of products empty', async () => {
     jest.spyOn(productRepository, 'find').mockResolvedValueOnce([]);
-    expect(service.findAllProducts()).rejects.toThrowError();
+    expect(service.findAll()).rejects.toThrowError();
   });
 
   it('should return error in list of products exception', async () => {
     jest.spyOn(productRepository, 'find').mockRejectedValueOnce(new Error());
-    expect(service.findAllProducts()).rejects.toThrowError();
+    expect(service.findAll()).rejects.toThrowError();
   });
 
   it('should return a product after save', async () => {
