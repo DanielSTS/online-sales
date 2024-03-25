@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { OrderProductEntity } from '../entities/order-product.entity';
 import { OrderProductService } from '../order-product.service';
 import { orderProductMock } from '../__mocks__/order-product.mock';
-import { orderEntityMock } from '../../order/__mocks__/order.mock';
+import { orderMock } from '../../order/__mocks__/order.mock';
 import { productEntityMock } from '../../product/__mocks__/product.mock';
 
 describe('OrderProductService', () => {
@@ -39,7 +39,7 @@ describe('OrderProductService', () => {
     const spy = jest.spyOn(orderProductRepository, 'save');
     const orderProduct = await service.createOrderProduct(
       productEntityMock.id,
-      orderEntityMock.id,
+      orderMock.id,
       orderProductMock.price,
       orderProductMock.amount,
     );
@@ -47,7 +47,7 @@ describe('OrderProductService', () => {
     expect(orderProduct).toEqual(orderProductMock);
     expect(spy.mock.calls[0][0].price).toEqual(orderProductMock.price);
     expect(spy.mock.calls[0][0].amount).toEqual(orderProductMock.amount);
-    expect(spy.mock.calls[0][0].orderId).toEqual(orderEntityMock.id);
+    expect(spy.mock.calls[0][0].orderId).toEqual(orderMock.id);
     expect(spy.mock.calls[0][0].productId).toEqual(productEntityMock.id);
   });
 
@@ -57,7 +57,7 @@ describe('OrderProductService', () => {
     expect(
       service.createOrderProduct(
         productEntityMock.id,
-        orderEntityMock.id,
+        orderMock.id,
         orderProductMock.price,
         orderProductMock.amount,
       ),

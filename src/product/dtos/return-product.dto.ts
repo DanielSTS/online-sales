@@ -1,5 +1,5 @@
 import { ProductEntity } from '../entities/product.entity';
-import { ReturnCategoryDTO } from 'src/category/dtos/return-category.dto';
+import { ReturnCategoryDTO } from '../../category/dtos/return-category.dto';
 
 export class ReturnProductDTO {
   id: number;

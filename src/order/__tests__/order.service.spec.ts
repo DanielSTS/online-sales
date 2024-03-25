@@ -13,7 +13,7 @@ import { NotFoundException } from '@nestjs/common';
 import { orderProductMock } from '../../order-product/__mocks__/order-product.mock';
 import { cartEntityMock } from '../../cart/__mocks__/cart.mock';
 import { productEntityMock } from '../../product/__mocks__/product.mock';
-import { cartProductEntityMock } from '../../cart-product/__mocks__/card-product.mock';
+import { cartProductEntityMock } from '../../cart-product/__mock__/cart-product.mock';
 import { createOrderPixMock } from '../__mocks__/create-order.mock';
 import { paymentMock } from '../../payment/__mocks__/payment.mock';
 

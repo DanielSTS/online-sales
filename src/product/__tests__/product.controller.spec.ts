@@ -16,7 +16,7 @@ describe('ProductController', () => {
         {
           provide: ProductService,
           useValue: {
-            findAllProducts: jest.fn().mockResolvedValue([productEntityMock]),
+            findAll: jest.fn().mockResolvedValue([productEntityMock]),
             createProduct: jest.fn().mockResolvedValue(productEntityMock),
             updateProduct: jest.fn().mockResolvedValue(productEntityMock),
             deleteProduct: jest.fn().mockResolvedValue(returnDeleteMock),
